@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+ Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel pgmodeler-ver="1.0.1" use-changelog="false" last-position="0,322" last-zoom="0.75" max-obj-count="8"
+	 default-schema="public" default-owner="postgres"
+	 layers="Default layer"
+	 active-layers="0"
+	 layer-name-colors="#000000"
+	 layer-rect-colors="#b4b4b4"
+	 show-layer-names="false" show-layer-rects="false">
+<database name="wallet_db" encoding="UTF8" lc-collate="en_US.utf8" lc-ctype="en_US.utf8" is-template="false" allow-conns="true">
+	<role name="postgres"/>
+	<tablespace name="pg_default"/>
+</database>
+
+<schema name="public" layers="0" rect-visible="true" fill-color="#e1e1e1" sql-disabled="true">
+</schema>
+
+<schema name="ontop" layers="0" rect-visible="true" fill-color="#ffd786">
+	<role name="postgres"/>
+</schema>
+
+<schema name="provider" layers="0" rect-visible="true" fill-color="#e1e1e1">
+	<role name="postgres"/>
+</schema>
+
+<sequence name="tbl_user_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="2147483647" cache="1">
+	<schema name="ontop"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="tbl_user" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="ontop"/>
+	<role name="postgres"/>
+	<position x="60" y="60"/>
+	<column name="id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="name" not-null="true">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="identification">
+		<type name="character varying" length="50"/>
+	</column>
+	<constraint name="tbl_user_pk" type="pk-constr" table="ontop.tbl_user">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="tbl_recipient_bank_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="2147483647" cache="1">
+	<schema name="ontop"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="tbl_recipient_bank" layers="0" collapse-mode="2" max-obj-count="10" z-value="0">
+	<schema name="ontop"/>
+	<role name="postgres"/>
+	<position x="740" y="60"/>
+	<column name="id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="bank_name" not-null="true">
+		<type name="character varying" length="0"/>
+	</column>
+	<column name="account_number">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="first_name" not-null="true">
+		<type name="character varying" length="100"/>
+	</column>
+	<column name="last_name" not-null="true">
+		<type name="character varying" length="100"/>
+	</column>
+	<column name="routing_number" not-null="true">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="dni_number">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="prefered" not-null="true" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<constraint name="tbl_recipient_bank_pk" type="pk-constr" table="ontop.tbl_recipient_bank">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="tbl_wallet_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="2147483647" cache="1">
+	<schema name="ontop"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="tbl_wallet" layers="0" collapse-mode="2" max-obj-count="8" z-value="0">
+	<schema name="ontop"/>
+	<role name="postgres"/>
+	<position x="200" y="240"/>
+	<column name="id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="balance" not-null="true">
+		<type name="numeric" length="13" precision="2"/>
+	</column>
+	<column name="account_number" not-null="true">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="routing_number" not-null="true">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="prefered" not-null="true" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<constraint name="tbl_wallet_pk" type="pk-constr" table="ontop.tbl_wallet">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<sequence name="tbl_transaction_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="2147483647" cache="1">
+	<schema name="ontop"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="tbl_transaction" layers="0" collapse-mode="2" max-obj-count="20" z-value="0">
+	<schema name="ontop"/>
+	<role name="postgres"/>
+	<position x="640" y="380"/>
+	<column name="id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="transaction_id">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="fee">
+		<type name="numeric" length="13" precision="2"/>
+	</column>
+	<column name="current_balance">
+		<type name="numeric" length="13" precision="2"/>
+	</column>
+	<column name="amount">
+		<type name="numeric" length="13" precision="2"/>
+	</column>
+	<column name="payment" not-null="true" default-value="false">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="src_currency">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="des_currency">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="src_account">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="des_account">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="src_routing_number">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="des_routing_number">
+		<type name="character varying" length="255"/>
+	</column>
+	<column name="created_date" not-null="true" default-value="CURRENT_TIMESTAMP">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="updated_date" not-null="true" default-value="CURRENT_TIMESTAMP">
+		<type name="timestamp" length="0"/>
+	</column>
+	<constraint name="tbl_transaction_pk" type="pk-constr" table="ontop.tbl_transaction">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="id_tbl_recipient_bank" index="15"/>
+		<object name="id_tbl_status" index="14"/>
+		<object name="id_tbl_wallet" index="16"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="tbl_recipient_bank_fk" index="2"/>
+		<object name="tbl_status_fk" index="1"/>
+		<object name="tbl_wallet_fk" index="3"/>
+	</customidxs>
+</table>
+
+<sequence name="tbl_currency_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="2147483647" cache="1">
+	<schema name="ontop"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="tbl_currency" layers="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="ontop"/>
+	<role name="postgres"/>
+	<position x="40" y="520"/>
+	<column name="id" not-null="true">
+		<type name="serial" length="0"/>
+	</column>
+	<column name="currency_name">
+		<type name="character varying" length="200"/>
+	</column>
+	<column name="currency_abbreviate" not-null="true">
+		<type name="character varying" length="4"/>
+	</column>
+	<constraint name="tbl_currency_pk" type="pk-constr" table="ontop.tbl_currency">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="tbl_status" layers="0" collapse-mode="2" max-obj-count="2" z-value="0">
+	<schema name="ontop"/>
+	<role name="postgres"/>
+	<position x="1040" y="360"/>
+	<column name="id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="status_name" not-null="true">
+		<type name="character varying" length="150"/>
+	</column>
+	<constraint name="tbl_status_pk" type="pk-constr" table="ontop.tbl_status">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="tbl_provider_transaction" layers="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="provider"/>
+	<role name="postgres"/>
+	<position x="940" y="860"/>
+	<column name="id" not-null="true">
+		<type name="uuid" length="0"/>
+	</column>
+	<column name="created_date" not-null="true">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="updated_date" not-null="true" default-value="CURRENT_TIMESTAMP">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="status" not-null="true">
+		<type name="varchar" length="20"/>
+	</column>
+	<constraint name="tbl_provider_transaction_pk" type="pk-constr" table="provider.tbl_provider_transaction">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="tbl_status_has_many_tbl_transaction" type="rel1n" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#1f45f8"
+	 src-table="ontop.tbl_status"
+	 dst-table="ontop.tbl_transaction"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="tbl_user_has_many_tbl_wallet" type="rel1n" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#302a92"
+	 src-table="ontop.tbl_user"
+	 dst-table="ontop.tbl_wallet"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="tbl_currency_has_many_tbl_wallet" type="rel1n" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#b3f896"
+	 src-table="ontop.tbl_currency"
+	 dst-table="ontop.tbl_wallet"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="tbl_recipient_bank_has_many_tbl_transaction" type="rel1n" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#57e824"
+	 src-table="ontop.tbl_recipient_bank"
+	 dst-table="ontop.tbl_transaction"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="tbl_wallet_has_many_tbl_transaction" type="rel1n" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#1c1eb5"
+	 src-table="ontop.tbl_wallet"
+	 dst-table="ontop.tbl_transaction"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="tbl_user_has_many_tbl_recipient_bank" type="rel1n" layers="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#241a99"
+	 src-table="ontop.tbl_user"
+	 dst-table="ontop.tbl_recipient_bank"
+	 src-required="false" dst-required="false"/>
+
+</dbmodel>

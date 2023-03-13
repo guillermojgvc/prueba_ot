@@ -1,0 +1,1 @@
+package com.ontop.wallet.entities.projection;

@@ -1,0 +1,15 @@
+# Compilar la aplicacion
+FROM maven:3.8.7-openjdk-18-slim as build
+WORKDIR /usr/src/ontop
+COPY . /usr/src/ontop
+RUN rm -rf /usr/src/ontop/src/main/resources/application.properties
+RUN mv /usr/src/ontop/src/main/resources/application.properties.prod /usr/src/ontop/src/main/resources/application.properties
+
+# Generación JAR ontop
+RUN mvn -f pom.xml clean package install -DskipTests
+
+# Levantar la aplicacion
+FROM openjdk:17.0.2-jdk
+
+COPY --from=build /usr/src/ontop/target/wallet-0.0.1-SNAPSHOT.war /app/runner.war
+ENTRYPOINT java -jar /app/runner.war
